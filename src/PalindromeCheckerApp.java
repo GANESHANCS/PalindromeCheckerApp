@@ -1,24 +1,42 @@
-import java.util.Scanner;
-
 public class PalindromeCheckerApp {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        System.out.print("Enter Input : ");
-        String input = sc.nextLine();
-        String normalized = input.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
-        boolean isPalindrome = true;
-        for (int i = 0; i < normalized.length() / 2; i++) {
 
-            if (normalized.charAt(i) !=
-                    normalized.charAt(normalized.length() - 1 - i)) {
-                isPalindrome = false;
-                break;
+    public static void main(String[] args) {
+
+        String input = "level";
+
+        PalindromeStrategy strategy = new StackStrategy();
+
+        boolean result = strategy.check(input);
+
+        System.out.println("Input : " + input);
+        System.out.println("Is Palindrome? : " + result);
+    }
+}
+
+interface PalindromeStrategy {
+    boolean check(String input);
+}
+
+class StackStrategy implements PalindromeStrategy {
+
+    public boolean check(String input) {
+
+        if (input == null) {
+            return false;
+        }
+
+        java.util.Stack<Character> stack = new java.util.Stack<>();
+
+        for (char c : input.toCharArray()) {
+            stack.push(c);
+        }
+
+        for (char c : input.toCharArray()) {
+            if (c != stack.pop()) {
+                return false;
             }
         }
 
-        System.out.println("Input : " + input);
-        System.out.println("Is Palindrome? : " + isPalindrome);
-
-        sc.close();
+        return true;
     }
 }
