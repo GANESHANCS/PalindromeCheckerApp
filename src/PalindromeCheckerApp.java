@@ -1,21 +1,26 @@
-public class PalindromeCheckerApp {
-    static void main(String[] args) {
-        String input = "madam";
-        boolean isPalindrome = true;
+import java.util.Stack;
 
-        for(int i=0; i< input.length()/2; i++) {
-            if(input.charAt(i) != input.charAt(input.length() -1 - i)) {
+public class PalindromeCheckerApp {
+
+    public static void main(String[] args) {
+
+        String input = "noon";
+        Stack<Character> stack = new Stack<>();
+
+        for (char c : input.toCharArray()) {
+            stack.push(c);
+        }
+        boolean isPalindrome = true;
+        for (char c : input.toCharArray()) {
+            if (c != stack.pop()) {
                 isPalindrome = false;
                 break;
             }
         }
-        if(isPalindrome) {
-            System.out.println(input + ": is it a palindrome? : true");
+        if (isPalindrome) {
+            System.out.println("Input:"+input + "\nIs it a palindrome? : Yes");
         } else {
-            System.out.println(input + ": is it a palindrome? : false");
+            System.out.println("Input:"+input + "\nIs it a palindrome? : No");
         }
-
     }
 }
-
-
